@@ -1,7 +1,7 @@
 # Languages
 
-* [English](https://github.com/KappaSoftware/ktelegrambot#kappasoftwarebot)
-* [Español](https://github.com/KappaSoftware/ktelegrambot#kappasoftwarebot-1)
+* [English](https://github.com/KappaSoftware/KappaTelegramBot_Public#kappa-software-telegram-bot)
+* [Español](https://github.com/KappaSoftware/KappaTelegramBot_Public#bot-de-telegram-de-kappa-software)
 
 # Kappa Software Telegram bot
 
