@@ -3,15 +3,15 @@ import folium
 
 encoded_image = base64.b64encode(open("location_icon.png", "rb").read())
 decoded_image = encoded_image.decode()
-
-
-mapa = folium.Map(location=[7.148202,-73.135969], zoom_start=5)
-
-feature_group = folium.FeatureGroup('markers')
-icon_url = 'data:image/png;base64,' + f'{decoded_image}'
 #print (icon_url)
 
+
+
 def map_code(data, language):
+	# print(data)
+	mapa = folium.Map(location=[7.148202,-73.135969], zoom_start=5)
+	feature_group = folium.FeatureGroup('markers')
+	icon_url = 'data:image/png;base64,' + f'{decoded_image}'
 
 	for feature in data:
 
@@ -22,7 +22,7 @@ def map_code(data, language):
 
 		folium.Marker(location=list(feature['geometry']['coordinates']),
 			icon = folium.features.CustomIcon(icon_url,icon_size=(40, 40)),
-			popup=popup_text
+			popup=popup_text, reset=True
 			).add_to(feature_group)
 
 	feature_group.add_to(mapa)
