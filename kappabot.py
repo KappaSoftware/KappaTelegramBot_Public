@@ -299,8 +299,8 @@ def build_category(update: Update, context: CallbackContext):
 
     in_message = bad_language_filter(get_new_category)
 
-    cond_1 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var == 'Verified_User')
-    cond_2 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var != 'Verified_User')
+    cond_1 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') #and (id_verifier_var == 'Verified_User')
+    # cond_2 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var != 'Verified_User')
     cond_3 = (in_message[0] != 'Thank you') or (in_message[1] != 'Gracias')
 
     if cond_1:
@@ -310,8 +310,8 @@ def build_category(update: Update, context: CallbackContext):
         user_data[category] = id_new_category
         update.message.reply_text('''Please type "/subcategory" followed by the name of the subcategory you want to add (it must have only one word).
                     \n Example:\n/subcategory Public''')
-    elif cond_2:
-        update.message.reply_text('''It seems you did not accept our Terms of Use and Privacy Policy. To create a new category you must accept. To do so, please restart your interaction with the bot by pressing here /start''')
+    # elif cond_2:
+    #     update.message.reply_text('''It seems you did not accept our Terms of Use and Privacy Policy. To create a new category you must accept. To do so, please restart your interaction with the bot by pressing here /start''')
 
     elif cond_3:
         update.message.reply_text('Inappropriate use of language detected, please remove any word that could be considered indecent or offensive.')
@@ -323,8 +323,8 @@ def construir_categoria(update: Update, context: CallbackContext):
 
     in_message = bad_language_filter(get_new_category)
 
-    cond_1 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var == 'Verified_User')
-    cond_2 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var != 'Verified_User')
+    cond_1 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') #and (id_verifier_var == 'Verified_User')
+    # cond_2 = (in_message[0] == 'Thank you') and (in_message[1] == 'Gracias') and (id_verifier_var != 'Verified_User')
     cond_3 = (in_message[0] != 'Thank you') or (in_message[1] != 'Gracias')
 
     if cond_1:
@@ -335,8 +335,8 @@ def construir_categoria(update: Update, context: CallbackContext):
         update.message.reply_text('''Por favor escribe "/subcategoria" seguido del nombre de la subcategoría que deseas agregar (usa una sola palabra).
                 \nEjemplo:\n/subcategoria Públicas''')
         
-    elif cond_2:
-        update.message.reply_text('''Parece que no has aceptado nuestros Términos de uso y Políticas de Privacidad. Crear una nueva categoría requiere que aceptes  nuestros términos y políticas, para esto, reinicia tu interacción con el bot presionando aqui /iniciar''')
+    # elif cond_2:
+    #     update.message.reply_text('''Parece que no has aceptado nuestros Términos de uso y Políticas de Privacidad. Crear una nueva categoría requiere que aceptes  nuestros términos y políticas, para esto, reinicia tu interacción con el bot presionando aqui /iniciar''')
         
     elif cond_3:
         update.message.reply_text('Uso inapropiado de lenguaje, por favor remueve cualquier palabra que pueda ser considerada indecente u ofensiva.')
@@ -349,16 +349,12 @@ def build_subcategory(update: Update, context: CallbackContext):
     in_message = bad_language_filter(new_subcategory)
 
     if ((in_message[0] == 'Thank you') and (in_message[1] == 'Gracias')):
-        if id_verifier_var == 'Verified_User':
-            id_owner_category = context.user_data['idNewCategory']
-            build_new_subcategory(id_owner_category, new_subcategory)
-            global jsons
-            jsons = jsons_next_time()
-            update.message.reply_text('''Congratulations! the new category/subcategory is updated, but the point is not registered on the map yet.
+        id_owner_category = context.user_data['idNewCategory']
+        build_new_subcategory(id_owner_category, new_subcategory)
+        global jsons
+        jsons = jsons_next_time()
+        update.message.reply_text('''Congratulations! the new category/subcategory is updated, but the point is not registered on the map yet.
                                  \nTo actually register the location, please, restart the process by pressing here /ToDo''')
-        else:
-            update.message.reply_text('''It seems you did not accept our Terms of Use and Privacy Policy. To create a new subcategory you must accept. To do so, please restart your interaction with the bot by pressing here /start ''')
-
 
     elif ((in_message[0] != 'Thank you') or (in_message[1] != 'Gracias')):
         update.message.reply_text('Inappropriate use of language detected, please remove any word that could be considered indecent or offensive.')
@@ -371,16 +367,12 @@ def construir_subcategoria(update: Update, context: CallbackContext):
     in_message = bad_language_filter(new_subcategory)
 
     if ((in_message[0] == 'Thank you') and (in_message[1] == 'Gracias')):
-        if id_verifier_var == 'Verified_User':
-            id_owner_category = context.user_data['idNewCategory']
-            build_new_subcategory(id_owner_category, new_subcategory)
-            global jsons
-            jsons = jsons_next_time()
-            update.message.reply_text('''¡Felicidades! La nueva categoría/subcategoría ha sido creada, pero la localización todavía no se ha registrado en el mapa. 
+        id_owner_category = context.user_data['idNewCategory']
+        build_new_subcategory(id_owner_category, new_subcategory)
+        global jsons
+        jsons = jsons_next_time()
+        update.message.reply_text('''¡Felicidades! La nueva categoría/subcategoría ha sido creada, pero la localización todavía no se ha registrado en el mapa. 
                     \nPara registrar la localización, por favor reinicia el proceso presionando este vínculo /Hacer.''')
-            
-        else:
-            update.message.reply_text('''Parece que no has aceptado nuestros Términos de uso y Políticas de Privacidad. Crear una nueva subcategoría requiere que aceptes  nuestros términos y políticas, para esto, reinicia tu interacción con el bot presionando aqui /iniciar ''')
             
     elif ((in_message[0] != 'Thank you') or (in_message[1] != 'Gracias')):
         update.message.reply_text('Uso inapropiado de lenguaje, por favor remueve cualquier palabra que pueda ser considerada indecente u ofensiva.')
@@ -562,6 +554,7 @@ def interface(update: Update, context: CallbackContext):
             user_data['SubCategoryId'] = l
             data_points_ulr = 'https://kappasw.org/kappa/data/subcategory/' + f'{l}' 
             map_dat = get_json(data_points_ulr)
+            # print(map_dat)
             map_code(map_dat, idiom)
             context.bot.sendDocument(update.effective_chat.id, document = open('Mapa_send.html', 'rb'))
             if idiom == "es":
@@ -573,6 +566,8 @@ def interface(update: Update, context: CallbackContext):
 
 def local_search(update: Update, context: CallbackContext):
     global search_var
+    global jsons
+    jsons = jsons_next_time()
     categories = jsons[1][0][:-1]
     reply_keyboards = get_three(categories)
     keyboards = build_vert_keyboards(reply_keyboards)
@@ -582,6 +577,8 @@ def local_search(update: Update, context: CallbackContext):
 
 def busqueda_local(update: Update, context: CallbackContext):
     global search_var
+    global jsons
+    jsons = jsons_next_time()
     categories = jsons[1][1][:-1]
     reply_keyboards = get_three(categories)
     keyboards = build_vert_keyboards(reply_keyboards)
@@ -607,6 +604,9 @@ def get_location(update: Update, context: CallbackContext):
             update.message.reply_test("Algo salió mal, por favor envíame la localización nuevamente.")
         else:
             update.message.reply_text("Something went wrong, please send me the location again.")
+
+    global jsons
+    jsons = jsons_next_time()
 
     if idiom == "es":
         categories = jsons[1][1]
